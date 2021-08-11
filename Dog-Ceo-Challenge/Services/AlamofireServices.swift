@@ -15,7 +15,6 @@ protocol BreedService {
 
 final class BreedServiceImpl: BreedService {
     func getListBreeds(completion: @escaping (Result<[Breed], Error>) -> Void) {
-        print("\(AppConstants.URL_DOG_CEO)/breeds/list")
         AF.request("\(AppConstants.URL_DOG_CEO)/breeds/list").responseDecodable(of: BreedCollection.self) { response in
             
             guard let breedCollection = response.value else {
