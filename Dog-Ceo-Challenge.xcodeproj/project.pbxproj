@@ -17,6 +17,9 @@
 		91AABC7826C2070D00B27DB3 /* AlamofireServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AABC7726C2070D00B27DB3 /* AlamofireServices.swift */; };
 		91AABC7B26C21C9400B27DB3 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AABC7A26C21C9400B27DB3 /* AppConstants.swift */; };
 		91AABC7F26C22A6D00B27DB3 /* BreedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AABC7E26C22A6D00B27DB3 /* BreedTableViewCell.swift */; };
+		91AABC8326C363A200B27DB3 /* ImagesBreedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AABC8226C363A200B27DB3 /* ImagesBreedsViewController.swift */; };
+		91AABC8526C36EA200B27DB3 /* BreedImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AABC8426C36EA200B27DB3 /* BreedImagesCollectionViewCell.swift */; };
+		91AABC8726C3762700B27DB3 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AABC8626C3762700B27DB3 /* UIImageView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		91AABC7726C2070D00B27DB3 /* AlamofireServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireServices.swift; sourceTree = "<group>"; };
 		91AABC7A26C21C9400B27DB3 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		91AABC7E26C22A6D00B27DB3 /* BreedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedTableViewCell.swift; sourceTree = "<group>"; };
+		91AABC8226C363A200B27DB3 /* ImagesBreedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesBreedsViewController.swift; sourceTree = "<group>"; };
+		91AABC8426C36EA200B27DB3 /* BreedImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedImagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		91AABC8626C3762700B27DB3 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,8 @@
 			children = (
 				91AABC5D26C1FD3400B27DB3 /* HomeViewController.swift */,
 				91AABC7E26C22A6D00B27DB3 /* BreedTableViewCell.swift */,
+				91AABC8226C363A200B27DB3 /* ImagesBreedsViewController.swift */,
+				91AABC8426C36EA200B27DB3 /* BreedImagesCollectionViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -122,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				91AABC7A26C21C9400B27DB3 /* AppConstants.swift */,
+				91AABC8626C3762700B27DB3 /* UIImageView+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -201,13 +210,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91AABC8326C363A200B27DB3 /* ImagesBreedsViewController.swift in Sources */,
 				91AABC7F26C22A6D00B27DB3 /* BreedTableViewCell.swift in Sources */,
 				91AABC6F26C2021800B27DB3 /* Breed.swift in Sources */,
 				91AABC7B26C21C9400B27DB3 /* AppConstants.swift in Sources */,
 				91AABC5E26C1FD3400B27DB3 /* HomeViewController.swift in Sources */,
 				91AABC7826C2070D00B27DB3 /* AlamofireServices.swift in Sources */,
+				91AABC8726C3762700B27DB3 /* UIImageView+Ext.swift in Sources */,
 				91AABC5A26C1FD3400B27DB3 /* AppDelegate.swift in Sources */,
 				91AABC5C26C1FD3400B27DB3 /* SceneDelegate.swift in Sources */,
+				91AABC8526C36EA200B27DB3 /* BreedImagesCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

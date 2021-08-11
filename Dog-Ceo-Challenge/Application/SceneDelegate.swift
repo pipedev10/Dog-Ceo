@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let breedService = BreedServiceImpl()
-        window?.rootViewController = HomeViewController(breedService: breedService)
+        //window?.rootViewController = HomeViewController(breedService: breedService)
+        window?.rootViewController = ImagesBreedsViewController(breedService: breedService)
         window?.makeKeyAndVisible()
     }
 
