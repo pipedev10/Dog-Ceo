@@ -10,14 +10,16 @@ import UIKit
 class ImagesBreedsViewController: UIViewController {
     
     // MARK: - Properties
-    var breed = [Breed]()
+    var breedsImages = [Breed]()
     let breedService: BreedService
+    let breed: String
     
     private var collectionView: UICollectionView?
     
     // MARK: - Initialization
-    init(breedService: BreedService) {
+    init(breedService: BreedService, breed: String) {
         self.breedService = breedService
+        self.breed = breed
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,7 +30,7 @@ class ImagesBreedsViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        //view.backgroundColor = UIColor(red: 169 / 255, green: 223 / 255, blue: 224 / 255, alpha: 0.1)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 1
@@ -39,17 +41,19 @@ class ImagesBreedsViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout)
         
+        collectionView?.backgroundColor = UIColor(red: 179 / 255, green: 254 / 255, blue: 255 / 255, alpha: 1)
+        
         guard let collectionView = collectionView else {
             return
         }
         
-        breedService.getListImagesByBreed(by: "akita",completion: { [weak self] breedResult in
+        breedService.getListImagesByBreed(by: self.breed,completion: { [weak self] breedResult in
             switch breedResult {
             case .failure(let error):
                 //ErrorPresenter.showError(message: "There was an error getting the acronyms", on: self)
                 print("error: \(error) ")
-            case .success(let breed):
-                self?.breed = breed
+            case .success(let breeds):
+                self?.breedsImages = breeds
                 self?.collectionView?.reloadData()
             }
         })
@@ -65,7 +69,7 @@ class ImagesBreedsViewController: UIViewController {
 // MARK: - Setup CollectionView
 extension ImagesBreedsViewController: UICollectionViewDataSource,UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return breed.count
+        return breedsImages.count
     }
     
     
@@ -73,7 +77,16 @@ extension ImagesBreedsViewController: UICollectionViewDataSource,UICollectionVie
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BreedImagesCollectionViewCell.identifier, for: indexPath) as? BreedImagesCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configure(UrlImage: breed[indexPath.row])
+        cell.configure(UrlImage: breedsImages[indexPath.row])
+        cell.delegate = self
         return cell
+    }
+}
+
+extension ImagesBreedsViewController: BreedImagesCollectionViewCellDelegate {
+    func breedImagesCollectionViewCell(cell: BreedImagesCollectionViewCell) {
+        let alert = UIAlertController(title: "Felicidades", message: "Adoptaste a este perro", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 }

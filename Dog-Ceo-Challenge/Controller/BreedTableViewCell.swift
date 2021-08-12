@@ -31,7 +31,8 @@ class BreedTableViewCell: UITableViewCell {
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = UIColor(red: 179 / 255, green: 254 / 255, blue: 255 / 255, alpha: 1)
+        
         contentView.addSubview(iconBreed)
         contentView.addSubview(labelBreed)
     }
