@@ -31,8 +31,8 @@ class HomeViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
-        
+        title = "Breeds"
+        view.backgroundColor = UIColor(red: 179 / 255, green: 254 / 255, blue: 255 / 255, alpha: 1)
         breedService.getListBreeds{ [weak self] breedResult in
             switch breedResult {
             case .failure(let error):
@@ -72,5 +72,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableBreeds.deselectRow(at: indexPath, animated: true)
+        let vc = ImagesBreedsViewController(breedService: breedService, breed: breed[indexPath.row])
+        vc.title = breed[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

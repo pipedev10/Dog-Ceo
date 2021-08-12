@@ -26,12 +26,12 @@ final class BreedServiceImpl: BreedService {
     }
     
     func getListImagesByBreed(by name: String, completion: @escaping (Result<[Breed], Error>) -> Void) {
-        AF.request("\(AppConstants.URL_DOG_CEO)/breed/\(name)/images").responseDecodable(of: [Breed].self) { response in
+        AF.request("\(AppConstants.URL_DOG_CEO)/breed/\(name)/images").responseDecodable(of: BreedCollection.self) { response in
             guard let breedsImage = response.value else {
                 completion(.failure(response.error!))
                 return
             }
-            completion(.success(breedsImage))
+            completion(.success(breedsImage.breeds ?? []))
         }
     }
 }
