@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BreedImagesCollectionViewCellDelegate: AnyObject {
-    func breedImagesCollectionViewCell(cell: BreedImagesCollectionViewCell)
+    func didTapAdoptButton()
 }
 
 class BreedImagesCollectionViewCell: UICollectionViewCell {
@@ -27,9 +27,9 @@ class BreedImagesCollectionViewCell: UICollectionViewCell {
     
     private lazy var btnAdoptMe: UIButton = {
         let button = UIButton()
-        button.setTitle("Adoptame", for: .normal)
+        button.setTitle("AdoptMe".localized, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = UIColor(red: 179 / 255, green: 254 / 255, blue: 255 / 255, alpha: 1)
+        button.backgroundColor = UIColor.primaryColor
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
@@ -81,6 +81,6 @@ class BreedImagesCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func didTapAdoptDog(){
-        delegate?.breedImagesCollectionViewCell(cell: self)
+        delegate?.didTapAdoptButton()
     }
 }

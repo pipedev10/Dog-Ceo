@@ -9,13 +9,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
     // MARK: - Properties
-    var breed = [Breed]()
-    let breedService: BreedService
-    let tableBreeds: UITableView = {
+    private var breed = [Breed]()
+    private let breedService: BreedService
+    private let tableBreeds: UITableView = {
         let table = UITableView()
         table.register(BreedTableViewCell.self, forCellReuseIdentifier: BreedTableViewCell.identifier)
         return table
     }()
+    
+    private let loadingVC = LoadingViewController()
     
     
     // MARK: - Initialization
@@ -31,24 +33,32 @@ class HomeViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Breeds"
-        view.backgroundColor = UIColor(red: 179 / 255, green: 254 / 255, blue: 255 / 255, alpha: 1)
+        title = "Title".localized
+        view.backgroundColor = UIColor.primaryColor
+        loadingVC.modalPresentationStyle = .overCurrentContext
+        present(loadingVC, animated: true)
+        
         breedService.getListBreeds{ [weak self] breedResult in
             switch breedResult {
             case .failure(let error):
-                //ErrorPresenter.showError(message: "There was an error getting the acronyms", on: self)
-                print("error: \(error) ")
+                self?.showAlert(alertMessage: "Hubo un error, favor intente más tarde. \(error)")
             case .success(let breed):
                 self?.breed = breed
                 self?.tableBreeds.reloadData()
                 
             }
+            self?.loadingVC.dismiss(animated: true)
         }
+        
         
         tableBreeds.dataSource = self
         tableBreeds.delegate = self
         
         view.addSubview(tableBreeds)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {

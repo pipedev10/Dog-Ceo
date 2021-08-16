@@ -10,11 +10,12 @@ import UIKit
 class ImagesBreedsViewController: UIViewController {
     
     // MARK: - Properties
-    var breedsImages = [Breed]()
-    let breedService: BreedService
-    let breed: String
+    private var breedsImages = [Breed]()
+    private let breedService: BreedService
+    private let breed: String
     
     private var collectionView: UICollectionView?
+    private let loadingVC = LoadingViewController()
     
     // MARK: - Initialization
     init(breedService: BreedService, breed: String) {
@@ -30,40 +31,43 @@ class ImagesBreedsViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = UIColor(red: 169 / 255, green: 223 / 255, blue: 224 / 255, alpha: 0.1)
+        setupUI()
+        getImagesBreeds()
+    }
+    
+    func setupUI(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 1
         layout.itemSize = CGSize(width: (view.frame.size.width / 2) - 4,
                                  height: (view.frame.size.width / 2) - 4)
-        
+        navigationController?.navigationBar.tintColor = .black
         collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout)
         
-        collectionView?.backgroundColor = UIColor(red: 179 / 255, green: 254 / 255, blue: 255 / 255, alpha: 1)
-        
+        collectionView?.backgroundColor = UIColor.primaryColor
         guard let collectionView = collectionView else {
             return
         }
-        
-        breedService.getListImagesByBreed(by: self.breed,completion: { [weak self] breedResult in
-            switch breedResult {
-            case .failure(let error):
-                //ErrorPresenter.showError(message: "There was an error getting the acronyms", on: self)
-                print("error: \(error) ")
-            case .success(let breeds):
-                self?.breedsImages = breeds
-                self?.collectionView?.reloadData()
-            }
-        })
-        
         collectionView.register(BreedImagesCollectionViewCell.self, forCellWithReuseIdentifier: BreedImagesCollectionViewCell.identifier)
         
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
+    }
+    
+    func getImagesBreeds(){
+        breedService.getListImagesByBreed(by: self.breed,completion: { [weak self] breedResult in
+            switch breedResult {
+            case .failure(let error):
+                self?.showAlert(alertMessage: "Hubo un error, favor intente más tarde. \(error)")
+            case .success(let breeds):
+                self?.breedsImages = breeds
+                self?.collectionView?.reloadData()
+            }
+        })
     }
 }
 // MARK: - Setup CollectionView
@@ -84,9 +88,7 @@ extension ImagesBreedsViewController: UICollectionViewDataSource,UICollectionVie
 }
 
 extension ImagesBreedsViewController: BreedImagesCollectionViewCellDelegate {
-    func breedImagesCollectionViewCell(cell: BreedImagesCollectionViewCell) {
-        let alert = UIAlertController(title: "Felicidades", message: "Adoptaste a este perro", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true)
+    func didTapAdoptButton() {
+        self.showAlert(alertMessage: "MessageAdoptDog".localized, alertTitle: "Congrats".localized)
     }
 }
