@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Dog-Ceo-Challenge
+
+  Created by Pipe Carrasco on 15-08-21.
+  
+*/
+
+// Home
+"Title" = "Breeds";
+
+// List images by breeds
+"MessageAdoptDog" = "You adopted this dog";
+"Congrats" = "Congratulations";
+"OK" = "Ok";
+"AdoptMe" = "Adopt me";
+"Error" = "Error";
+
